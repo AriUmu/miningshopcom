@@ -18,7 +18,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    @ElementCollection(targetClass=Integer.class)
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Product> product;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

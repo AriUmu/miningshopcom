@@ -1,6 +1,8 @@
 package mining.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,7 +18,7 @@ public class Product {
     private String nameProduct;
     private Double price;
     private String status;
-    @ElementCollection(targetClass=Integer.class)
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<User> users;
 
 
