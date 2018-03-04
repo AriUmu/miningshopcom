@@ -18,6 +18,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private Boolean isAdmin;
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Product> product;
 

@@ -12,21 +12,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 public class ProductTest {
 
-    private Logger logger = LoggerFactory.getLogger(UserTest.class);
+    private Logger logger = LoggerFactory.getLogger(ProductTest.class);
 
     @Autowired
     public ProductRepository productRepository;
@@ -63,6 +59,6 @@ public class ProductTest {
         userRepository.save(user);
         System.out.printf(user.toString());
 
-        assertTrue(userRepository.getByFirstName("Ari").getProducts().contains(product));
+        assertTrue(userRepository.getByEmail("Ariha@yandex.ru").getProducts().contains(product));
     }
 }

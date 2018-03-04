@@ -23,13 +23,12 @@ public class UserTest {
     @Test
     public void getByName() {
                 User user = new User();
-                user.setFirstName("Ari");
+                user.setFirstName("Arina");
                 user.setLastName("Um");
-                user.setEmail("Ariha@yandex.ru");
+                user.setEmail("ArihaU@yandex.ru");
                 user.setPassword("1234");
-                System.out.printf(user.toString());
                 userRepository.save(user);
-                User one = userRepository.getByFirstName("Ari");
-                assertThat(one.getFirstName(), is("Ari"));
+                User one = userRepository.getByEmail("ArihaU@yandex.ru");
+                assertThat(one.getFirstName(), is("Arina"));
             }
 }
