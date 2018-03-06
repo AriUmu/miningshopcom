@@ -2,6 +2,7 @@ package mining.service.impl;
 
 import mining.model.Product;
 import mining.model.User;
+import mining.persistence.ProductRepository;
 import mining.persistence.UserRepository;
 import mining.service.UserServiceInterface;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 public class UserService implements UserServiceInterface{
@@ -19,6 +21,9 @@ public class UserService implements UserServiceInterface{
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     public User loginUser(User user) throws Exception {
         String email = user.getEmail();
@@ -50,7 +55,9 @@ public class UserService implements UserServiceInterface{
 
     //TODO
     public boolean buyProduct(User user, Product product) {
-        return false;
+        List<Product> nameProduct = productRepository.getAllByUsersOrderByNameProduct(user);
+        nameProduct.add(product);
+        return true;
     }
 
     private static String encoderPass(String passwordToHash) {

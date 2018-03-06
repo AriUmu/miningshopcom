@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import static junit.framework.TestCase.assertTrue;
@@ -50,7 +51,7 @@ public class ProductTest {
         userRepository.save(user);
         logger.info("User " + user.getId() + " was saved.");
 
-        Set<Product> setOfProduct = new HashSet<Product>();
+        final Set<Product> setOfProduct = new HashSet<Product>();
         setOfProduct.add(productRepository.getById(1L));
         Iterator iterator = setOfProduct.iterator();
         System.out.println(iterator.next());
@@ -59,6 +60,14 @@ public class ProductTest {
         userRepository.save(user);
         System.out.printf(user.toString());
 
+        List<Product> nameProduct = productRepository.getAllByUsersOrderByNameProduct(user);
+
+        while (nameProduct.iterator().hasNext()){
+            System.out.println(nameProduct.iterator().next());
+        }
+
         assertTrue(userRepository.getByEmail("Ariha@yandex.ru").getProducts().contains(product));
+
     }
+
 }

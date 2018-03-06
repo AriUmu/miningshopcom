@@ -1,5 +1,6 @@
 package mining.persistence;
 
+import mining.model.Product;
 import mining.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
