@@ -3,6 +3,7 @@ package mining.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -17,11 +18,11 @@ public class Product {
     private Double price;
     private String status;
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<User> users;
+    private Set<Long> users = new HashSet<>();
 
 
     @ManyToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    public Set<User> getUsers(){
+    public Set<Long> getUsers(){
         return users;
     }
 

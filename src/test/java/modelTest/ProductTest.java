@@ -37,9 +37,7 @@ public class ProductTest {
         product.setNameProduct("Book");
         product.setPrice(12.44);
         product.setStatus("sold");
-        Set<User> setOfUser = new HashSet<User>();
-        product.setUsers(setOfUser);
-        productRepository.save(product);
+        Product prod1 = productRepository.save(product);
         logger.info("Product " + product.getId() + " was saved.");
 
 
@@ -48,25 +46,19 @@ public class ProductTest {
         user.setLastName("Um");
         user.setEmail("Ariha@yandex.ru");
         user.setPassword("1234");
-        userRepository.save(user);
+        User user1 = userRepository.save(user);
         logger.info("User " + user.getId() + " was saved.");
 
-        final Set<Product> setOfProduct = new HashSet<Product>();
-        setOfProduct.add(productRepository.getById(1L));
-        Iterator iterator = setOfProduct.iterator();
-        System.out.println(iterator.next());
+        HashSet<Long> set = new HashSet<>();
+        set.add(prod1.getId());
+        user1.getProduct().add(prod1.getId());
+        User user2 = userRepository.save(user1);
 
-        user.setProduct(setOfProduct);
-        userRepository.save(user);
-        System.out.printf(user.toString());
+        prod1.getUsers().add(user1.getId());
+        productRepository.save(prod1);
 
-        List<Product> nameProduct = productRepository.getAllByUsersOrderByNameProduct(user);
-
-        while (nameProduct.iterator().hasNext()){
-            System.out.println(nameProduct.iterator().next());
-        }
-
-        assertTrue(userRepository.getByEmail("Ariha@yandex.ru").getProducts().contains(product));
+        System.out.println(user2.toString());
+        assertTrue(userRepository.getByEmail("Ariha@yandex.ru").getProducts().contains(product.getId()));
 
     }
 

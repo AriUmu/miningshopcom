@@ -3,6 +3,9 @@ package mining.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -20,13 +23,12 @@ public class User {
     private String password;
     private Boolean isAdmin;
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Product> product;
+    private Set<Long> product = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_product", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    public Set<Product> getProducts(){
+    public Set<Long> getProducts(){
         return product;
     }
-
 }

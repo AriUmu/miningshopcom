@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService implements UserServiceInterface{
@@ -53,11 +56,14 @@ public class UserService implements UserServiceInterface{
         }
     }
 
-    //TODO
     public boolean buyProduct(User user, Product product) {
-        List<Product> nameProduct = productRepository.getAllByUsersOrderByNameProduct(user);
-        nameProduct.add(product);
-        return true;
+       user.getProduct().add(product.getId());
+       User user1 = userRepository.save(user);
+
+       product.getUsers().add(user1.getId());
+       productRepository.save(product);
+
+       return true;
     }
 
     private static String encoderPass(String passwordToHash) {
