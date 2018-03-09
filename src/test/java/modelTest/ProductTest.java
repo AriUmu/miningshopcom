@@ -1,6 +1,6 @@
 package modelTest;
 
-import mining.config.ApplicationConfig;
+import mining.Application;
 import mining.model.Product;
 import mining.model.User;
 import mining.persistence.ProductRepository;
@@ -10,17 +10,18 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
-import static junit.framework.TestCase.assertTrue;
+import java.util.HashSet;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApplicationConfig.class)
+@DataJpaTest
+@SpringBootTest(classes = Application.class)
 public class ProductTest {
 
     private Logger logger = LoggerFactory.getLogger(ProductTest.class);
