@@ -14,6 +14,12 @@ module.exports = {
         fs: "empty",
         net: 'empty'
     },
+    watch: true,
 
+    watchOptions: {
+        aggregateTimeout: 100,
+    },
+
+    devtool: "source-map"
 };
 
