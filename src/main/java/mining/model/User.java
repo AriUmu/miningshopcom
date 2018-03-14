@@ -1,34 +1,44 @@
 package mining.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "USER")
 public class User {
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String email, String password, Boolean isAdmin) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private Boolean isAdmin;
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Long> product = new HashSet<>();
+    protected Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_product", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    public Set<Long> getProducts(){
-        return product;
-    }
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "is_admin")
+    private Boolean isAdmin;
+
 }

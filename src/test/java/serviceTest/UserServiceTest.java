@@ -42,7 +42,7 @@ public class UserServiceTest {
         userService.registrationUser(user);
         User user1 = userService.loginUser(user);
         assertThat(user1.getPassword(), is(user.getPassword()));
-        logger.info("User " + user.getId() + " was loggined.");
+//        logger.info("User " + user.getId() + " was loggined.");
         System.out.printf(user.toString());
 
     }
@@ -69,9 +69,6 @@ public class UserServiceTest {
 
         userService.buyProduct(user1,product1);
         logger.info("Product " + product1.getId() + " was sold.");
-
-        assertTrue(user1.getProduct().contains(product.getId()));
-        System.out.printf(user1.toString());
 
     }
 }

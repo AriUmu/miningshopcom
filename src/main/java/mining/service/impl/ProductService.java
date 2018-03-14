@@ -21,7 +21,6 @@ public class ProductService implements ProductServiceInterface{
         product1.setStatus(product.getStatus());
         product1.setPrice(product.getPrice());
         product1.setNameProduct(product.getNameProduct());
-        product1.setUsers(product.getUsers());
         Product save = productRepository.save(product1);
         return save;
     }

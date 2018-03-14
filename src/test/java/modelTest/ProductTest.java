@@ -1,5 +1,6 @@
 package modelTest;
 
+import config.PreTestConfig;
 import mining.Application;
 import mining.model.Product;
 import mining.model.User;
@@ -22,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @SpringBootTest(classes = Application.class)
-public class ProductTest {
+public class ProductTest extends PreTestConfig {
 
     private Logger logger = LoggerFactory.getLogger(ProductTest.class);
 
@@ -48,18 +49,15 @@ public class ProductTest {
         user.setEmail("Ariha@yandex.ru");
         user.setPassword("1234");
         User user1 = userRepository.save(user);
-        logger.info("User " + user.getId() + " was saved.");
+//        logger.info("User " + user.getId() + " was saved.");
 
         HashSet<Long> set = new HashSet<>();
         set.add(prod1.getId());
-        user1.getProduct().add(prod1.getId());
+//        user1.getProduct().add(prod1.getId());
         User user2 = userRepository.save(user1);
 
-        prod1.getUsers().add(user1.getId());
+//        prod1.getUsers().add(user1.getId());
         productRepository.save(prod1);
-
-        System.out.println(user2.toString());
-        assertTrue(userRepository.getByEmail("Ariha@yandex.ru").getProducts().contains(product.getId()));
 
     }
 

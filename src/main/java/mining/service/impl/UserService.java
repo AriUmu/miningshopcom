@@ -45,7 +45,7 @@ public class UserService implements UserServiceInterface{
         if (userRepository.getByEmail(user.getEmail()) == null) {
             user.setPassword(encoderPass(user.getPassword()));
             userRepository.save(user);
-            logger.info("User " + user.getId()+"was saved succesfully");
+//            logger.info("User " + user.getId()+"was saved succesfully");
             return user;
         } else {
             throw new NullPointerException("The same login is exists yet!");
@@ -53,11 +53,11 @@ public class UserService implements UserServiceInterface{
     }
 
     public boolean buyProduct(User user, Product product) {
-       user.getProduct().add(product.getId());
-       User user1 = userRepository.save(user);
-
-       product.getUsers().add(user1.getId());
-       productRepository.save(product);
+//       user.getProducts().add(product.getId());
+//       User user1 = userRepository.save(user);
+//
+//       product.getUsers().add(user1.getId());
+//       productRepository.save(product);
 
        return true;
     }
