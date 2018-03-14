@@ -12,6 +12,16 @@ import java.util.Set;
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
+
+    public Product() {
+    }
+
+    public Product(String nameProduct, Double price, String status) {
+        this.nameProduct = nameProduct;
+        this.price = price;
+        this.status = status;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")

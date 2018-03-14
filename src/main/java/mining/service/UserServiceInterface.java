@@ -5,7 +5,7 @@ import mining.model.User;
 
 public interface UserServiceInterface {
 
-    User loginUser (User user) throws Exception;
+    User loginUser (String email, String password) throws Exception;
 
     boolean isAdmin (User user);
 

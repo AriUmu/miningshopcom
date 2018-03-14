@@ -2,7 +2,6 @@ package modelTest;
 
 import config.DataSourceConfigTest;
 import config.PreTestConfig;
-import mining.Application;
 import mining.model.User;
 import mining.persistence.UserRepository;
 import org.junit.Test;
@@ -16,8 +15,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@DataJpaTest
-//@SpringBootTest(classes = Application.class)
 public class UserTest  extends PreTestConfig {
 
     private Logger logger = LoggerFactory.getLogger(DataSourceConfigTest.class);
@@ -26,8 +23,8 @@ public class UserTest  extends PreTestConfig {
 
     @Test
     public void getByName() {
-                User user = new User("Ari", "fff", "ffff", "eee334", false);
-                userRepository.save(user);
+//                User user = new User("Ari", "fff", "ffff", "eee334", false);
+//                userRepository.save(user);
                 User one = userRepository.getByEmail("test3@test.com");
                 assertThat(one.getFirstName(), is("test3"));
             }
