@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@PropertySource({"classpath:application.properties"})
 public class DataSourceConfig {
 
     @Value("${spring.datasource.driverClassName}")
@@ -30,11 +31,11 @@ public class DataSourceConfig {
     private String dbPassword;
 
 
-//    @Value("${dbSQLSchema}")
-//    private Resource dbSQLSchema;
-//
-//    @Value("${dbSQLTestData}")
-//    private Resource dbSQLTestData;
+    @Value("${dbSQLSchema}")
+    private Resource dbSQLSchema;
+
+    @Value("${dbSQLTestData}")
+    private Resource dbSQLTestData;
 
     @Value("${hibernateDialect}")
     private String hibernateDialect;

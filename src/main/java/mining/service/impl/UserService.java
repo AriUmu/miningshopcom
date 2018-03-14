@@ -1,7 +1,9 @@
 package mining.service.impl;
 
+import mining.model.Orders;
 import mining.model.Product;
 import mining.model.User;
+import mining.persistence.OrderRepository;
 import mining.persistence.ProductRepository;
 import mining.persistence.UserRepository;
 import mining.service.UserServiceInterface;
@@ -24,11 +26,18 @@ public class UserService implements UserServiceInterface{
     @Autowired
     ProductRepository productRepository;
 
-    public User loginUser(User user) throws Exception {
-        String email = user.getEmail();
-        User userAccess = userRepository.getByEmail(email);
+    @Autowired
+    OrderRepository orderRepository;
+
+    public User loginUser(String email, String password) throws Exception {
+        User userAccess;
+        if(!(email.equals(null) || password.equals(null))){
+           userAccess = userRepository.getByEmail(email);
+        }else {
+            return null;
+        }
         if (userAccess.getEmail() != null) {
-            if (userAccess.getPassword().equals(user.getPassword())) {
+            if (userAccess.getPassword().equals(encoderPass(password))) {
                 logger.info("User successfully accessed to the page");
                 return userAccess;
             }
@@ -43,7 +52,8 @@ public class UserService implements UserServiceInterface{
 
     public User registrationUser(User user) {
         if (userRepository.getByEmail(user.getEmail()) == null) {
-            user.setPassword(encoderPass(user.getPassword()));
+            String pass = encoderPass(user.getPassword());
+            user.setPassword(pass);
             userRepository.save(user);
             logger.info("User " + user.getId()+"was saved succesfully");
             return user;
@@ -53,13 +63,9 @@ public class UserService implements UserServiceInterface{
     }
 
     public boolean buyProduct(User user, Product product) {
-       user.getProduct().add(product.getId());
-       User user1 = userRepository.save(user);
-
-       product.getUsers().add(user1.getId());
-       productRepository.save(product);
-
-       return true;
+        Orders orders = new Orders(user.getId(), product.getId());
+        orderRepository.save(orders);
+        return true;
     }
 
     private static String encoderPass(String passwordToHash) {

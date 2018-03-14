@@ -31,38 +31,23 @@ public class ProductServiceTest {
 
     @Test
     public void createProduct() {
-        Product product = new Product();
-        product.setNameProduct("Book");
-        product.setPrice(12.99);
-        product.setStatus("sold");
+        Product product = new Product("Book", 12.77, "sold");
         Product save = productService.createProduct(product);
-        assertThat(save.getPrice(), is(12.99));
+        assertThat(save.getPrice(), is(12.77));
     }
 
     @Test
     public void updateProductServise(){
-        Product product = new Product();
-        product.setNameProduct("Book");
-        product.setPrice(12.99);
-        product.setStatus("sold");
-        Product save = productService.createProduct(product);
-
-        save.setPrice(14.33);
-        save.setStatus("open");
-
-        Product update = productService.updateProduct(save);
-        assertThat(update.getPrice(), is(14.33));
+        Product byId = productRepository.getById(7L);
+        byId.setNameProduct("book777");
+        Product save = productService.updateProduct(byId);
+        assertThat(save.getNameProduct(), is("book777"));
     }
 
     @Test
     public void deleteProductServise(){
-        Product product = new Product();
-        product.setNameProduct("Book");
-        product.setPrice(12.99);
-        product.setStatus("sold");
-        Product save = productService.createProduct(product);
-
-        productService.deleteProduct(save);
-        assertTrue(productRepository.getById(save.getId()) == null);
+//        Product byId = productRepository.getById(5L);
+//        productService.deleteProduct(byId);
+//        assertTrue(productRepository.getById(byId.getId()) == null);
     }
 }
