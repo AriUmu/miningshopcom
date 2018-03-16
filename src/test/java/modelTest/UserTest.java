@@ -25,7 +25,7 @@ public class UserTest  extends PreTestConfig {
     public void getByName() {
 //                User user = new User("Ari", "fff", "ffff", "eee334", false);
 //                userRepository.save(user);
-                User one = userRepository.getByEmail("test3@test.com");
-                assertThat(one.getFirstName(), is("test3"));
+                User one = userRepository.getByEmail("test211@test.com");
+                assertThat(one.getFirstName(), is("test2"));
             }
 }

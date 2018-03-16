@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 public class UserControllers {
 
     public static final int CLEAR_COOKIE_AGE = 0;
+    public static final int CREATE_COOKIE_AGE = 256 * 24 * 60 * 60;
 
     @Autowired
     UserService userService;
@@ -35,14 +36,29 @@ public class UserControllers {
         return new ResponseEntity<>(user1, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/add")
+    @RequestMapping(method = RequestMethod.PUT, value = "/login")
     @ApiOperation(value = "login attempt", notes = "Temporary login service")
-    public ResponseEntity<User> loginUser(String email, String password) throws Exception {
+    public ResponseEntity<Cookie> loginUser(String email, String password) throws Exception {
         User user1 = userService.loginUser(email, password);
-        return new ResponseEntity<>(user1, HttpStatus.OK);
+        Cookie cookie = createCookie(user1);
+        return new ResponseEntity<Cookie>(cookie, HttpStatus.OK);
     }
 
-    //TODO
+    @RequestMapping(method = RequestMethod.GET, value = "/logout")
+    @ApiOperation(value="logout", notes = "Temporary logout service")
+    public ResponseEntity logout (HttpServletResponse response, HttpServletRequest request){
+        clearCookie(request, response);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    private Cookie createCookie (User user){
+        Cookie cookie = new Cookie("name", user.getFirstName());
+        cookie.setMaxAge(CREATE_COOKIE_AGE);
+        cookie.setPath("/");
+        return cookie;
+    }
+
+    //TODO the esc of the site
     private void clearCookie(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (request.isRequestedSessionIdValid() && session != null) {
@@ -56,8 +72,4 @@ public class UserControllers {
             response.addCookie(cookie);
         }
     }
-
-
-
-
 }
