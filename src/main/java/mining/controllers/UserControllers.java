@@ -45,13 +45,13 @@ public class UserControllers {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/logout")
-    @ApiOperation(value="logout", notes = "Temporary logout service")
-    public ResponseEntity logout (HttpServletResponse response, HttpServletRequest request){
+    @ApiOperation(value = "logout", notes = "Temporary logout service")
+    public ResponseEntity logout(HttpServletResponse response, HttpServletRequest request) {
         clearCookie(request, response);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    private Cookie createCookie (User user){
+    private Cookie createCookie(User user) {
         Cookie cookie = new Cookie("name", user.getFirstName());
         cookie.setMaxAge(CREATE_COOKIE_AGE);
         cookie.setPath("/");
