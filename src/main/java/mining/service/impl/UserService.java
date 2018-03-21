@@ -16,7 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Service
-public class UserService implements UserServiceInterface{
+public class UserService implements UserServiceInterface {
 
     protected static Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -30,18 +30,15 @@ public class UserService implements UserServiceInterface{
     OrderRepository orderRepository;
 
     public User loginUser(String email, String password) throws Exception {
-        User userAccess;
-        if(!(email.equals(null) || password.equals(null))){
-           userAccess = userRepository.getByEmail(email);
-        }else {
-            return null;
-        }
-        if (userAccess.getEmail() != null) {
+        try {
+            User userAccess = userRepository.getByEmail(email);
             if (userAccess.getPassword().equals(encoderPass(password))) {
                 logger.info("User successfully accessed to the page");
                 return userAccess;
             }
             throw new Exception("The password is not correct!");
+        } catch (NullPointerException e) {
+            System.err.println("Password or email is null");
         }
         return null;
     }
@@ -51,15 +48,20 @@ public class UserService implements UserServiceInterface{
     }
 
     public User registrationUser(User user) {
-        if (userRepository.getByEmail(user.getEmail()) == null) {
-            String pass = encoderPass(user.getPassword());
-            user.setPassword(pass);
-            userRepository.save(user);
-            logger.info("User " + user.getId()+"was saved succesfully");
-            return user;
-        } else {
-            throw new NullPointerException("The same login is exists yet!");
+        try {
+            if (userRepository.getByEmail(user.getEmail()) == null) {
+                String pass = encoderPass(user.getPassword());
+                user.setPassword(pass);
+                userRepository.save(user);
+                logger.info("User " + user.getId() + "was saved succesfully");
+                return user;
+            } else {
+                throw new NullPointerException("The same login is exists yet!");
+            }
+        } catch (NullPointerException e) {
+            System.err.println("Password or email is null");
         }
+        return null;
     }
 
     public boolean buyProduct(User user, Product product) {

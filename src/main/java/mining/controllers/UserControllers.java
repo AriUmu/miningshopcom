@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,25 +21,41 @@ import javax.servlet.http.HttpSession;
 public class UserControllers {
 
     public static final int CLEAR_COOKIE_AGE = 0;
+    public static final int CREATE_COOKIE_AGE = 256 * 24 * 60 * 60;
 
     @Autowired
     UserService userService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     @ApiOperation(value = "registration attempt", notes = "Temporary register service")
-    public ResponseEntity<User> registrationUser(User user) throws Exception {
+    public ResponseEntity<User> registrationUser(@RequestBody User user) throws Exception {
         User user1 = userService.registrationUser(user);
         return new ResponseEntity<>(user1, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/add")
+    @RequestMapping(method = RequestMethod.PUT, value = "/login")
     @ApiOperation(value = "login attempt", notes = "Temporary login service")
-    public ResponseEntity<User> loginUser(String email, String password) throws Exception {
+    public ResponseEntity<Cookie> loginUser(@PathVariable String email,@PathVariable String password) throws Exception {
         User user1 = userService.loginUser(email, password);
-        return new ResponseEntity<>(user1, HttpStatus.OK);
+        Cookie cookie = createCookie(user1);
+        return new ResponseEntity<Cookie>(cookie, HttpStatus.OK);
     }
 
-    //TODO
+    @RequestMapping(method = RequestMethod.GET, value = "/logout")
+    @ApiOperation(value = "logout", notes = "Temporary logout service")
+    public ResponseEntity logout(HttpServletResponse response, HttpServletRequest request) {
+        clearCookie(request, response);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    private Cookie createCookie(User user) {
+        Cookie cookie = new Cookie("name", user.getFirstName());
+        cookie.setMaxAge(CREATE_COOKIE_AGE);
+        cookie.setPath("/");
+        return cookie;
+    }
+
+    //TODO the esc of the site
     private void clearCookie(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (request.isRequestedSessionIdValid() && session != null) {
@@ -56,8 +69,4 @@ public class UserControllers {
             response.addCookie(cookie);
         }
     }
-
-
-
-
 }
