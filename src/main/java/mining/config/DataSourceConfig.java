@@ -72,7 +72,6 @@ public class DataSourceConfig {
 //        populator.addScript(dbSQLSchema);
 //        populator.addScript(dbSQLTestData);
         DatabasePopulatorUtils.execute(populator, ds);
-
         return ds;
     }
 }

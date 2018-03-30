@@ -1,0 +1,43 @@
+<meta charset="UTF-8">
+<title>MininngShop</title>
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script type="text/javascript"  src="./script.js"></script>
+<script>
+    function loginout() {
+        $.post("http://localhost:8080/logout", {
+        }, function (data) {
+        }).done(function () {
+            console.log("exit access");
+        }).fail(function (xhr, textStatus, errorThrown) {
+            alert("Выйти не удалось!")
+        });
+    }
+</script>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#section1">Главная</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#section2">О нас</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#section3">Магазин</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#section4">Тест на горняка</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#section5">Контакты</a>
+        </li>
+        <li>
+            <div style="position: absolute; right: 0">
+                <form>
+                    <div class="col-xs-4">
+                        <button onclick="loginout()" style="margin-right: 20px">Выйти</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</nav>
