@@ -28,11 +28,15 @@ public class UserControllers {
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     @ApiOperation(value = "registration attempt", notes = "Temporary register service")
-    public ResponseEntity<User> registrationUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,@RequestParam("email") String email, @RequestParam("password") String password) throws Exception {
+    public ResponseEntity<User> registrationUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,@RequestParam("email") String email, @RequestParam("password") String password) {
         User user = new User(firstName, lastName, email, password, false);
-        User user1 = userService.registrationUser(user);
-        System.out.println(user.toString());
-        return new ResponseEntity<>(user1, HttpStatus.OK);
+        try{
+            userService.registrationUser(user);
+            System.out.println(user.toString());
+        } catch (Exception e){
+            System.err.println("The email already exists!");
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
@@ -52,7 +56,7 @@ public class UserControllers {
 
     private Cookie createCookie(User user) {
         System.out.println(user);
-        Cookie cookie = new Cookie("name", user.getFirstName());
+        Cookie cookie = new Cookie("name", "Trololo");
         cookie.setMaxAge(CREATE_COOKIE_AGE);
         //cookie.setPath("/");
         return cookie;

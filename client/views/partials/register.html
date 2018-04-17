@@ -1,7 +1,6 @@
 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <!--<script type="text/javascript"  src="./script.js"></script>-->
 <script>
-    var access = false;
     function a() {
         var name = $('#name').val();
         var lastname = $('#lastname').val();
@@ -23,10 +22,9 @@
             }).done(function () {
                 alert("Вы успешно зарегестрировались!");
                 $('#cencel').click();
-                access = true;
             }).fail(function (xhr, textStatus, errorThrown) {
                 alert("Такой email уже существует!");
-                $('#registrate').click();
+                $('#registrate').toggle();
             });
         }
     }
