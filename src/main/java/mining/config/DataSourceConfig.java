@@ -53,7 +53,7 @@ public class DataSourceConfig {
         Properties hibernateProp = new Properties();
 
         hibernateProp.put("hibernate.dialect", hibernateDialect);
-        hibernateProp.put("hibernate.hbm2ddl.auto", "update");
+        hibernateProp.put("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProp.put("hibernate.show_sql", showSQL);
         hibernateProp.put("hibernate.format_sql", true);
 
