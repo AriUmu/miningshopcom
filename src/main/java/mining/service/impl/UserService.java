@@ -48,7 +48,6 @@ public class UserService implements UserServiceInterface {
     }
 
     public User registrationUser(User user) {
-        try {
             if (userRepository.getByEmail(user.getEmail()) == null) {
                 String pass = encoderPass(user.getPassword());
                 user.setPassword(pass);
@@ -58,10 +57,6 @@ public class UserService implements UserServiceInterface {
             } else {
                 throw new NullPointerException("The same login is exists yet!");
             }
-        } catch (NullPointerException e) {
-            System.err.println("Password or email is null");
-        }
-        return null;
     }
 
     public boolean buyProduct(User user, Product product) {

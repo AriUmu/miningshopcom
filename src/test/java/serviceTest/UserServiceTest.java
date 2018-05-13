@@ -48,10 +48,10 @@ public class UserServiceTest {
     @Test
     public void buyProduct() throws Exception {
 
-        Product byId = productRepository.getById(6L);
-        User byId1 = userRepository.getByEmail("ArihaU@yandex.ru");
-        userService.buyProduct(byId1, byId);
-        logger.info("Product " + byId.getId() + " was sold.");
+//        Product byId = productRepository.getById(6L);
+//        User byId1 = userRepository.getByEmail("ArihaU@yandex.ru");
+////        userService.buyProduct(byId1, byId);
+//        logger.info("Product " + byId.getId() + " was sold.");
 
     }
 }

@@ -8,7 +8,7 @@ module.exports = {
     entry: './server.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'build.js'
+        filename: 'bu,i2ld.js'
     },
     node: {
         fs: "empty",

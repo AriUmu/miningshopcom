@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User getByEmail(String login) throws NullPointerException;
+    User getByEmail(String login);
     void deleteByFirstName(String name);
     List<User> findAll();
 

@@ -42,7 +42,7 @@ public class ProductTest extends PreTestConfig {
 //        Product prod1 = productRepository.save(product);
 //        logger.info("Product " + product.getId() + " was saved.");
 
-        assertThat(productRepository.getById(5L).getNameProduct(), is("Book"));
+//        assertThat(productRepository.getById(5L).getNameProduct(), is("Book"));
     }
 
 }

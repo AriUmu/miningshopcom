@@ -53,7 +53,7 @@ public class DataSourceConfig {
         Properties hibernateProp = new Properties();
 
         hibernateProp.put("hibernate.dialect", hibernateDialect);
-        hibernateProp.put("hibernate.hbm2ddl.auto", "update");
+        hibernateProp.put("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProp.put("hibernate.show_sql", showSQL);
         hibernateProp.put("hibernate.format_sql", true);
 
@@ -72,7 +72,6 @@ public class DataSourceConfig {
 //        populator.addScript(dbSQLSchema);
 //        populator.addScript(dbSQLTestData);
         DatabasePopulatorUtils.execute(populator, ds);
-
         return ds;
     }
 }
