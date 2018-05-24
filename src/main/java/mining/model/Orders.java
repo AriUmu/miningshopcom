@@ -25,3 +25,5 @@ public class Orders {
     @Column(name = "product_id")
     private Long IdProduct;
 }
+
+

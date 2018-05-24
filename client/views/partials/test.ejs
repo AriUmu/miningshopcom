@@ -1,6 +1,19 @@
 <style>
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 </style>
+<script>
+    function answer(){
+        let answer1 = document.getElementById("1answer");
+        let answer2 = document.getElementById("2answer");
+        let answer3 = document.getElementById("3answer");
+
+        if(answer1.checked && answer2.checked && answer3.checked){
+            alert("Молодец!")
+        }else {
+            alert("Попробуй еще раз)")
+        }
+    }
+</script>
 <div id="section4">
 <div class="container">
     <h1 class="font-bold mt-12 mb-6 h1">Тест на Горняка</h1>
@@ -20,7 +33,7 @@
             </div>
             <div class="form-check">
                 <label>
-                    <input type="radio" name="radio"> <span class="label-text">Не пойти на пару)</span>
+                    <input id="1answer" type="radio" name="radio"> <span class="label-text">Не пойти на пару)</span>
                 </label>
             </div>
         </form>
@@ -40,7 +53,7 @@
             </div>
             <div class="form-check">
                 <label>
-                    <input type="radio" name="radio"> <span class="label-text">С вещами отпроситься в туалет</span>
+                    <input id="2answer" type="radio" name="radio"> <span class="label-text">С вещами отпроситься в туалет</span>
                 </label>
             </div>
         </form>
@@ -60,12 +73,13 @@
             </div>
             <div class="form-check">
                 <label>
-                    <input type="radio" name="radio"> <span class="label-text">Познать метод волшебного тыка</span>
+                    <input id="3answer" type="radio" name="radio"> <span class="label-text">Познать метод волшебного тыка</span>
                 </label>
             </div>
         </form>
     </div>
     <br>
+    <button id="btn" onclick="answer()">Ответить</button>
     <br>
 </div>
 </div>
